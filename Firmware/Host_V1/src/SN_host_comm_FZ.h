@@ -4,11 +4,11 @@
 #include <bluefruit.h>
 
 #define MAX_PKG_LEN 200
-#define PKG_LEN     40
+#define PKG_LEN     100
 
 extern volatile bool ble_connnected;
 
-extern char pkg2send[PKG_LEN];
+extern uint8_t pkg2send[PKG_LEN];
 
 extern void update(void);
 extern void SN_host_BLE_init(void);

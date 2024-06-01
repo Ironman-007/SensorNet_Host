@@ -13,12 +13,7 @@ void setup() {
 
 void loop() {
   if (ble_connnected) {
-    SN_host_comm_tst_func();
-    delay(2000);
+    // SN_host_comm_tst_func();
+    // delay(2000);
   }
 }
-
-
-
-
-
