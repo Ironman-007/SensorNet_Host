@@ -12,3 +12,22 @@ void SN_host_system_init(bool serial_en) {
     }
   }
 }
+
+void SN_host_pin_init(void) {
+  pinMode(IND_LED_PIN, OUTPUT);
+  digitalWrite(IND_LED_PIN, LOW);
+}
+
+void IND_LED(IND_LED_STATE led_state) {
+  digitalWrite(IND_LED_PIN, led_state);
+}
+
+void SN_host_tst_func(void) {
+  digitalWrite(IND_LED_PIN, LOW);
+  delay(100);
+  digitalWrite(IND_LED_PIN, HIGH);
+  delay(100);
+}
+
+
+
