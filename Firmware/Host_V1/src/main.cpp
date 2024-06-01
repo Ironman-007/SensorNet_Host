@@ -1,18 +1,12 @@
 #include <Arduino.h>
 
-// put function declarations here:
-int myFunction(int, int);
+#include "SN_host_system_FZ.h"
+#include "SN_host_comm_FZ.h"
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  SN_host_system_init(SERIAL_DEBUG);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  update();
 }
