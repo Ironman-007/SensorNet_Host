@@ -51,6 +51,16 @@ void flash_IND_LED(int flash_interval_ms) {
   digitalWrite(IND_LED_PIN, LOW);
 }
 
+void flash_IND_LED_inv(int flash_interval_ms) {
+  digitalWrite(IND_LED_PIN, LOW);
+  delay(flash_interval_ms);
+  digitalWrite(IND_LED_PIN, HIGH);
+}
+
+void SN_host_nodes_init(void) {
+  Wire.begin();
+}
+
 void SN_host_tst_func(void) {
   digitalWrite(IND_LED_PIN, LOW);
   delay(100);

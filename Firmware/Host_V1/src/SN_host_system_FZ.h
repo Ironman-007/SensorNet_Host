@@ -17,6 +17,7 @@ enum IND_LED_STATE {
 
 extern void IND_LED(IND_LED_STATE led_state);
 extern void flash_IND_LED(int flash_interval_ms);
+extern void flash_IND_LED_inv(int flash_interval_ms);
 
 extern void SN_host_tst_func(void);
 
@@ -28,3 +29,5 @@ extern void SN_host_tst_func(void);
 extern volatile bool timer4Interrupt_2s;
 
 extern void SN_host_interrupt_init(void);
+
+extern void SN_host_nodes_init(void);

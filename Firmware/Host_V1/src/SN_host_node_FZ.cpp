@@ -2,8 +2,9 @@
 // Created: 2024-05-24
 // This is used to communicate with the node.
 
-#include "SN_host_comm_FZ.h"
 #include "SN_host_node_FZ.h"
+#include "SN_host_comm_FZ.h"
+#include "SN_host_system_FZ.h"
 
 SN_nodes SN_nodes_net_FZ;
 
@@ -41,10 +42,10 @@ void SN_nodes::SN_host_scan_node(uint8_t node_addr_start, int steps) {
     Wire.beginTransmission(addr_i);
     err_code = Wire.endTransmission();
 
-    if (err_code == 0) {
-      this -> SN_node_addr[this -> SN_node_cnt] = addr_i;
-      this -> SN_node_cnt ++;
-    }
+    // if (err_code == 0) {
+    //   this -> SN_node_addr[this -> SN_node_cnt] = addr_i;
+    //   this -> SN_node_cnt ++;
+    // }
   }
 }
 
@@ -66,6 +67,12 @@ void SN_nodes::SN_host_get_node_data(uint8_t node_addr_start) {
 
 void SN_update_addr_net(void) {
   SN_nodes_net_FZ.SN_host_scan_node(1, 10);
+  if (!ble_connnected) {
+    flash_IND_LED(10);
+  }
+  else {
+    flash_IND_LED_inv(10);
+  }
 }
 
 void SN_send_node_data(void) {
