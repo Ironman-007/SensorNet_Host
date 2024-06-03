@@ -5,6 +5,28 @@
 #include "SN_host_system_FZ.h"
 #include "SN_host_node_FZ.h"
 
+#include "NRF52TimerInterrupt.h"
+#include "NRF52_ISR_Timer.h"
+
+NRF52Timer ITimer(NRF_TIMER_1);
+NRF52_ISR_Timer ISR_Timer;
+
+volatile bool timer4Interrupt_2s = false;
+
+// ===================== Interrupt functions =====================
+static void TimerHandler(void) {
+  ISR_Timer.run();
+}
+
+static void timer_handler_2s(void) {
+  timer4Interrupt_2s = true;
+}
+
+void SN_host_interrupt_init(void) {
+  ITimer.attachInterruptInterval(HW_TIMER_INTERVAL_MS * 1000, TimerHandler);
+  ISR_Timer.setInterval(TIMER_INTERVAL_2s, timer_handler_2s);
+}
+
 void SN_host_system_init(bool serial_en) {
   if (serial_en) {
     Serial.begin(115200);
@@ -21,6 +43,12 @@ void SN_host_pin_init(void) {
 
 void IND_LED(IND_LED_STATE led_state) {
   digitalWrite(IND_LED_PIN, led_state);
+}
+
+void flash_IND_LED(int flash_interval_ms) {
+  digitalWrite(IND_LED_PIN, HIGH);
+  delay(flash_interval_ms);
+  digitalWrite(IND_LED_PIN, LOW);
 }
 
 void SN_host_tst_func(void) {

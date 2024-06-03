@@ -65,13 +65,15 @@ void SN_nodes::SN_host_get_node_data(uint8_t node_addr_start) {
 }
 
 void SN_update_addr_net(void) {
-  SN_nodes_net_FZ.SN_host_scan_node(1, 100);
+  SN_nodes_net_FZ.SN_host_scan_node(1, 10);
 }
 
 void SN_send_node_data(void) {
-  for (uint8_t addr_i = 0; addr_i < SN_nodes_net_FZ.SN_node_cnt; addr_i++) {
-    SN_nodes_net_FZ.SN_host_get_node_data(SN_nodes_net_FZ.SN_node_addr[addr_i]);
-    SN_host_comm_send_data(SN_nodes_net_FZ.SN_node_data, NODE_DATA_BYTES_CNT);
+  if (SN_nodes_net_FZ.SN_node_cnt > 0) {
+    for (uint8_t addr_i = 0; addr_i < SN_nodes_net_FZ.SN_node_cnt; addr_i++) {
+      SN_nodes_net_FZ.SN_host_get_node_data(SN_nodes_net_FZ.SN_node_addr[addr_i]);
+      SN_host_comm_send_data(SN_nodes_net_FZ.SN_node_data, NODE_DATA_BYTES_CNT);
+    }
   }
 }
 
