@@ -13,8 +13,9 @@ void setup() {
 }
 
 void loop() {
+  SN_update_addr_net();
+
   if (ble_connnected) {
-    // SN_host_comm_tst_func();
-    // delay(2000);
+    SN_update_addr_net();
   }
 }

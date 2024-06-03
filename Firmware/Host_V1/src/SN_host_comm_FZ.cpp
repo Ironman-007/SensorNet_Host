@@ -3,6 +3,7 @@
 // This file is used for the BLE communication.
 
 #include "SN_host_comm_FZ.h"
+#include "SN_host_node_FZ.h"
 #include "SN_host_system_FZ.h"
 
 volatile bool ble_connnected = false;
@@ -14,8 +15,7 @@ volatile bool ble_connnected = false;
 BLEUart bleuart;
 
 // callback invoked when central connects
-void connect_callback(uint16_t conn_handle)
-{
+void connect_callback(uint16_t conn_handle) {
   // Get the reference to current connection
   BLEConnection* connection = Bluefruit.Connection(conn_handle);
 
@@ -38,8 +38,7 @@ void connect_callback(uint16_t conn_handle)
   ble_connnected = true;
 }
 
-void disconnect_callback(uint16_t conn_handle, uint8_t reason)
-{
+void disconnect_callback(uint16_t conn_handle, uint8_t reason) {
   (void) conn_handle;
   (void) reason;
 
@@ -86,6 +85,10 @@ void SN_host_BLE_startAdv(void)
   // Bluefruit.Advertising.setInterval(32, 244);    // in unit of 0.625 ms
   // Bluefruit.Advertising.setFastTimeout(30);      // number of seconds in fast mode
   Bluefruit.Advertising.start(0);                   // 0 = Don't stop advertising after n seconds  
+}
+
+void SN_host_comm_send_data(uint8_t *data2send, uint8_t len) {
+  bleuart.write(data2send, len);
 }
 
 void SN_host_comm_tst_func(void) {

@@ -3,6 +3,7 @@
 // This file is used for the system control, like serialport initialization etc.
 
 #include "SN_host_system_FZ.h"
+#include "SN_host_node_FZ.h"
 
 void SN_host_system_init(bool serial_en) {
   if (serial_en) {

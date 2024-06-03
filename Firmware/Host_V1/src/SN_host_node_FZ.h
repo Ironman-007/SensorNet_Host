@@ -6,25 +6,43 @@
 #include "SN_host_comm_FZ.h"
 #include "SN_host_system_FZ.h"
 
-// define a class named SN_node
-class SN_node
+#define NODE_SCAN_PERIOD    1000 // The period of scanning the nodes in the network
+#define SN_MAX_NODE_CNT     100  // The maximum number of nodes in the network
+#define NODE_DATA_BYTES_CNT 56   // The number of bytes of data in each node
+
+// The information of the whole sensor network
+// store the address of all nodes, how many nodes in the network
+class SN_nodes
 {
 private:
-    /* data */
+  int SCAN_PERIOD = NODE_SCAN_PERIOD; 
+
 public:
-    SN_node(/* args */);
-    ~SN_node();
+  SN_nodes(/* args */);
+  ~SN_nodes();
+
+  // The number of nodes in the network
+  volatile int SN_node_cnt;
+
+  // The address of all nodes in the network
+  uint8_t SN_node_addr[SN_MAX_NODE_CNT];
+  uint8_t SN_node_data[NODE_DATA_BYTES_CNT];
+
+  void reset_node_data(void);
+  void reset_node_addr(void);
+
+  // Scan the nodes in the network and update the SN_node_cnt and SN_node_addr
+  void SN_host_scan_node(uint8_t node_addr_start, int steps);
+
+  // Get data from A SINGLE NODE and store data in the SN_node_data.
+  void SN_host_get_node_data(uint8_t node_addr_start);
 };
 
-SN_node::SN_node(/* args */)
-{
-}
+// extern SN_node
+extern SN_nodes SN_nodes_net_FZ;
 
-SN_node::~SN_node()
-{
-}
-
-extern void SN_host_scan_node(void);
+extern void SN_update_addr_net(void);
+extern void SN_send_node_data(void);
 
 
 
