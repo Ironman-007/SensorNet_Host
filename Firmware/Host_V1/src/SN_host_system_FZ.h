@@ -18,3 +18,9 @@ enum IND_LED_STATE {
 extern void IND_LED(IND_LED_STATE led_state);
 
 extern void SN_host_tst_func(void);
+
+// parameters for interrupt
+#define HW_TIMER_INTERVAL_MS 1
+#define TIMER_INTERVAL_1s    1000L
+
+extern volatile bool timer4Interrupt_1s;

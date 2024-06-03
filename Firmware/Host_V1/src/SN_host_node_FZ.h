@@ -10,6 +10,9 @@
 #define SN_MAX_NODE_CNT     100  // The maximum number of nodes in the network
 #define NODE_DATA_BYTES_CNT 56   // The number of bytes of data in each node
 
+static_assert(NODE_DATA_BYTES_CNT <= MAX_PKG_LEN,
+              "The number of bytes from each node should be less than 200!");
+
 // The information of the whole sensor network
 // store the address of all nodes, how many nodes in the network
 class SN_nodes
