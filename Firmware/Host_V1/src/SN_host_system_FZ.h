@@ -6,7 +6,9 @@
 
 extern void SN_host_system_init(bool serial_en);
 
-#define IND_LED_PIN PIN_SPI_MOSI // LED
+#define IND_LED_PIN       13 // LED
+#define SN_host_SDA_PIN   26
+#define SN_host_SCL_PIN   27
 
 extern void SN_host_pin_init(void);
 

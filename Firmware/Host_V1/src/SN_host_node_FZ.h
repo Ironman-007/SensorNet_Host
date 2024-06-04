@@ -46,6 +46,7 @@ extern SN_nodes SN_nodes_net_FZ;
 
 extern void SN_update_addr_net(void);
 extern void SN_send_node_data(void);
+extern void SN_send_node_num(void);
 
 
 

@@ -42,10 +42,10 @@ void SN_nodes::SN_host_scan_node(uint8_t node_addr_start, int steps) {
     Wire.beginTransmission(addr_i);
     err_code = Wire.endTransmission();
 
-    // if (err_code == 0) {
-    //   this -> SN_node_addr[this -> SN_node_cnt] = addr_i;
-    //   this -> SN_node_cnt ++;
-    // }
+    if (err_code == 0) {
+      this -> SN_node_addr[this -> SN_node_cnt] = addr_i;
+      this -> SN_node_cnt ++;
+    }
   }
 }
 
@@ -66,13 +66,22 @@ void SN_nodes::SN_host_get_node_data(uint8_t node_addr_start) {
 }
 
 void SN_update_addr_net(void) {
-  SN_nodes_net_FZ.SN_host_scan_node(1, 10);
+  SN_nodes_net_FZ.SN_host_scan_node(1, 50);
   if (!ble_connnected) {
     flash_IND_LED(10);
   }
   else {
     flash_IND_LED_inv(10);
   }
+}
+
+void SN_send_node_num(void) {
+  int node_cnt = SN_nodes_net_FZ.SN_node_cnt;
+  uint8_t node_cnt_byte_array[2] = {0};
+  byte * node_cnt_byte = (byte *) &node_cnt;
+  memcpy(&node_cnt_byte_array, node_cnt_byte, 2);
+
+  SN_host_comm_send_data(node_cnt_byte_array, 2);
 }
 
 void SN_send_node_data(void) {

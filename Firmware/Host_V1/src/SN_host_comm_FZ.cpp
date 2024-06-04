@@ -19,8 +19,6 @@ void connect_callback(uint16_t conn_handle) {
   // Get the reference to current connection
   BLEConnection* connection = Bluefruit.Connection(conn_handle);
 
-  // bledis.setModel("Bluefruit Feather52");
-
   // request to update data length
   // Serial.println("Request to change Data Length");
   connection->requestDataLengthUpdate();
@@ -56,11 +54,7 @@ void SN_host_BLE_init(void) {
 
   Bluefruit.setName("SensorNet - Host");
 
-  // bledfu.begin();
-  // bledis.begin();
   bleuart.begin();
-
-  // bleuart.setRxCallback(rx_callback);
 
   // Advertising packet
   Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);
@@ -78,8 +72,7 @@ void SN_host_BLE_init(void) {
   Bluefruit.Advertising.setFastTimeout(30);      // number of seconds in fast mode
 }
 
-void SN_host_BLE_startAdv(void)
-{
+void SN_host_BLE_startAdv(void) {
   // // Start Advertising
   Bluefruit.Advertising.restartOnDisconnect(true);
   // Bluefruit.Advertising.setInterval(32, 244);    // in unit of 0.625 ms

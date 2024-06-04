@@ -58,6 +58,7 @@ void flash_IND_LED_inv(int flash_interval_ms) {
 }
 
 void SN_host_nodes_init(void) {
+  Wire.setPins(SN_host_SDA_PIN, SN_host_SCL_PIN);
   Wire.begin();
 }
 
