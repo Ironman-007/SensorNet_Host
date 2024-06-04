@@ -26,10 +26,9 @@ extern void SN_host_tst_func(void);
 // parameters for interrupt
 
 #define HW_TIMER_INTERVAL_MS 1
-#define TIMER_INTERVAL_2s    2000L
+#define TIMER_INTERVAL_2s    3000L
 
 extern volatile bool timer4Interrupt_2s;
 
 extern void SN_host_interrupt_init(void);
-
 extern void SN_host_nodes_init(void);

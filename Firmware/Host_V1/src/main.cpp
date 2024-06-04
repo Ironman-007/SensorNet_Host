@@ -18,7 +18,7 @@ void loop() {
   if (timer4Interrupt_2s) {
     timer4Interrupt_2s = false;
     SN_update_addr_net();
-    SN_send_node_num();
+    SN_get_node_num();
   }
 
   if (ble_connnected) {

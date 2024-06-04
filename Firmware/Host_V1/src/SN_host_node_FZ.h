@@ -9,8 +9,9 @@
 #define NODE_SCAN_PERIOD    1000 // The period of scanning the nodes in the network
 #define SN_MAX_NODE_CNT     100  // The maximum number of nodes in the network
 #define NODE_DATA_BYTES_CNT 56   // The number of bytes of data in each node
+#define NODE_CNT_BYTE_NUM   2    // The maximum length of the package
 
-static_assert(NODE_DATA_BYTES_CNT <= MAX_PKG_LEN,
+static_assert(NODE_DATA_BYTES_CNT + NODE_CNT_BYTE_NUM <= MAX_PKG_LEN,
               "The number of bytes from each node should be less than 200!");
 
 // The information of the whole sensor network
@@ -29,7 +30,7 @@ public:
 
   // The address of all nodes in the network
   uint8_t SN_node_addr[SN_MAX_NODE_CNT];
-  uint8_t SN_node_data[NODE_DATA_BYTES_CNT];
+  uint8_t SN_node_data[NODE_DATA_BYTES_CNT +  NODE_CNT_BYTE_NUM];
 
   void reset_node_data(void);
   void reset_node_addr(void);
@@ -46,7 +47,7 @@ extern SN_nodes SN_nodes_net_FZ;
 
 extern void SN_update_addr_net(void);
 extern void SN_send_node_data(void);
-extern void SN_send_node_num(void);
+extern void SN_get_node_num(void);
 
 
 
