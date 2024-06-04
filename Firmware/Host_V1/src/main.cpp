@@ -21,6 +21,7 @@ void loop() {
     SN_get_node_num();
   }
 
+  // read data from each node and send through BLE.
   if (ble_connnected) {
     SN_send_node_data();
   }
